@@ -9,8 +9,7 @@ cd ./raspberry-python-webcam
 sudo apt-get install libjpeg62-turbo-dev zlib1g-dev libfreetype6-dev liblcms1-dev libjpeg-dev python3-picamera dos2unix
 sudo pip-3.2 install pillow -I
 
-dos2unix ./meteo.py && dos2unix ./cron.sh
-chmod +x ./meteo.py && chmod +x ./cron.sh
+dos2unix ./meteo.py && chmod +x ./meteo.py
 ```
 
 ## Calibration
@@ -22,5 +21,5 @@ Make some config in meteo.py and you set up!
 ```sh
 crontab -e
 # append to the end of file
-* * * * * /home/pi/raspberry-python-webcam/cron.sh > /home/pi/raspberry-python-webcam/.log 2>&1
+* * * * * python3 /home/pi/raspberry-python-webcam/meteo.py > /home/pi/raspberry-python-webcam/.log
 ```
