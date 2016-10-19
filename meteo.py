@@ -8,6 +8,7 @@ import picamera
 import os
 import subprocess
 import PIL
+from io import BytesIO
 from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
@@ -67,34 +68,19 @@ if (bearing < 0):
 
 degrees = round(math.degrees(bearing))
 
+stream = BytesIO()
 camera = picamera.PiCamera()
-camera.sharpness = 0
-camera.contrast = 0
-camera.brightness = 50
-camera.saturation = 0
-camera.ISO = 0
-camera.video_stabilization = False
-camera.exposure_compensation = 0
-camera.exposure_mode = 'auto'
-camera.meter_mode = 'average'
-camera.awb_mode = 'horizon'
-camera.image_effect = 'none'
-camera.color_effects = None
+camera.sharpness = 3
 camera.rotation = 180
-camera.hflip = False
-camera.vflip = False
-camera.crop = (0.0, 0.0, 1.0, 1.0)
-camera.capture(localPath + imageFile)
+camera.awb_mode = 'horizon'
+camera.start_preview()
+time.sleep(2)
+camera.capture(stream, format='jpeg', resize=(640, 480))
+stream.seek(0)
 
-img = Image.open(localPath + imageFile)
-basewidth = 640
-wpercent = (basewidth/float(img.size[0]))
-hsize = int((float(img.size[1])*float(wpercent)))
-img = img.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
-
+img = Image.open(stream)
 draw = ImageDraw.Draw(img)
 draw.text((430, 450), datetime.datetime.now().strftime("%d.%m.%Y %H:%M"),(255,255,255),font=font)
-#draw.text((10, 55), "Test",(255,255,255),font=font)
 
 compass = Image.open(localPath+"compass.png")
 img.paste(compass, (555, 10), compass)

@@ -6,10 +6,11 @@ Also enable I2C bus and camera in raspi-config
 ```sh
 git clone git://github.com/pilotak/raspberry-python-webcam.git
 cd ./raspberry-python-webcam
-sudo apt-get install libjpeg62-turbo-dev zlib1g-dev libfreetype6-dev liblcms1-dev libjpeg-dev python3-picamera
+sudo apt-get install libjpeg62-turbo-dev zlib1g-dev libfreetype6-dev liblcms1-dev libjpeg-dev python3-picamera dos2unix
 sudo pip-3.2 install pillow -I
-chmod +x ./meteo.py
-chmod +x ./cron.sh
+
+dos2unix ./meteo.py && dos2unix ./cron.sh
+chmod +x ./meteo.py && chmod +x ./cron.sh
 ```
 
 ## Calibration
