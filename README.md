@@ -6,8 +6,8 @@ Also enable I2C bus and camera in raspi-config
 ```sh
 git clone git://github.com/pilotak/raspberry-python-webcam.git
 cd ./raspberry-python-webcam
-sudo apt-get install python-smbus python3-smbus
-sudo apt-get install libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev python3-picamera dos2unix
+sudo apt-get install python3-smbus python3-picamera dos2unix
+sudo apt-get install libfreetype6-dev libtiff4-dev libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 sudo pip3 install pillow -I
 
 dos2unix ./meteo.py && chmod +x ./meteo.py
